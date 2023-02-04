@@ -1,3 +1,5 @@
+// Thanks https://github.com/electronicsguy/HTTPSRedirect For his Httpsredirect Lib 
+
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 #include "DHT.h"
@@ -9,8 +11,6 @@
 #include <DallasTemperature.h>
 
 #define ONE_WIRE_BUS D6
-//#define DHTTYPE DHT11 // type of the temperature seddd
-// const int DHTPin = D4; //--> The pin used fhe DHT11 sensor is Pin D1 = GPIO5
 // DHT dht(DHTPin, DHTTYPE); //--> Initialize DHT sensor, DHT dht(Pin_used, Type_of_DHT_Sensor);
 #define SENSOR D7
 #define ON_Board_LED 2 //--> Defining an On Board LED, used for indicators when the process of connecting to a wifi router
@@ -167,14 +167,14 @@ void loop()
   Serial.println(Flow);
   Serial.println(Vol);
   // String tem_2 = t_2
-  sendData();
+  //sendData();
   // sendData(t_2, h_2);
   //\//--> Calls the sendData Subroutine
-}
+///}
 
 // Subroutine for sending data to Google Sheets
-void sendData()
-{
+//void sendData()
+//{
   Serial.println("==========");
   Serial.print("connecting to ");
   Serial.println(host);
@@ -188,14 +188,13 @@ void sendData()
 
   //----------------------------------------Processing data and sending data
 
-  String string_temperaturein = String(t_1);
-  String string_humidityin = String(h_1, DEC);
-  String string_temperatureout = String(t_2);
-  String string_humidityout = String(h_2, DEC);
+  //String string_temperaturein = String(t_1);
+  //String string_humidityin = String(h_1, DEC);
+  //String string_temperatureout = String(t_2);
+  //String string_humidityout = String(h_2, DEC);
   //String string_flow = String(flowRate);
   //String string_vol = String(totalLitres);
-  String url = "/macros/s/" + GAS_ID + "/exec?temperaturein=" + string_temperaturein + "&humidityin=" + string_humidityin + "&temperatureout=" + string_temperatureout + "&humidityout=" + string_humidityout ;
-  // "&flowrate=" + string_flow + "&volume=" + string_vol 
+  String url = "/macros/s/" + GAS_ID + "/exec?temperaturein=" + String(t_1) + "&humidityin=" + String(h_1, DEC) + "&temperatureout=" + String(t_2) + "&humidityout=" + String(h_2, DEC) + "&flowrate=" + String(flowRate) + "&volume=" + String(totalLitres) ;
   Serial.print("requesting URL: ");
   Serial.println(url);
   client.print(String("GET ") + url + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "User-Agent: BuildFailureDetectorESP8266\r\n" + "Connection: close\r\n\r\n");
