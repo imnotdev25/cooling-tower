@@ -51,7 +51,7 @@ void IRAM_ATTR pulseCounter() {
 
 WiFiClientSecure client;  //--> Create a WiFiClientSecure object.
 
-String GAS_ID = "AKfycbzxgd_Ef5ki_Ti21QIH1VBRb5eU92rwsvAPQaDCSGGBLiim31QrQBp8KwUE2u-0tnWq";  //--> spreadsheet script ID
+String GAS_ID = " ";  //--> spreadsheet script ID
 
 void setup() {
   // put your setup code here, to run once:
